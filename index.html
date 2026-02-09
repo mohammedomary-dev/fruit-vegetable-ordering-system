@@ -1,1 +1,56 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fruit & Vegetable Ordering System</title>
+
+    <!-- Connect CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Fruit & Vegetable Ordering System</h1>
+        <p>Fresh produce, easy ordering</p>
+    </header>
+
+    <section class="products">
+        <h2>Available Products</h2>
+
+        <div class="product">
+            <h3>Apples</h3>
+            <p>Price: TZS 2,000 per kg</p>
+            <button onclick="addToOrder('Apples')">Add to Order</button>
+        </div>
+
+        <div class="product">
+            <h3>Bananas</h3>
+            <p>Price: TZS 1,500 per kg</p>
+            <button onclick="addToOrder('Bananas')">Add to Order</button>
+        </div>
+
+        <div class="product">
+            <h3>Tomatoes</h3>
+            <p>Price: TZS 1,800 per kg</p>
+            <button onclick="addToOrder('Tomatoes')">Add to Order</button>
+        </div>
+
+        <div class="product">
+            <h3>Onions</h3>
+            <p>Price: TZS 1,200 per kg</p>
+            <button onclick="addToOrder('Onions')">Add to Order</button>
+        </div>
+    </section>
+
+    <section class="order">
+        <h2>Your Order</h2>
+        <ul id="orderList"></ul>
+        <button onclick="placeOrder()">Place Order</button>
+    </section>
+
+    <!-- Connect JavaScript -->
+    <script src="js/script.js"></script>
+
+</body>
+</html>
