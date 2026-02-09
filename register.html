@@ -1,1 +1,33 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+
+<h2>Register</h2>
+
+<form onsubmit="registerUser(event)">
+    <input type="text" id="username" placeholder="Username" required><br><br>
+    <input type="password" id="password" placeholder="Password" required><br><br>
+    <button type="submit">Register</button>
+</form>
+
+<p>Already have an account? <a href="login.html">Login</a></p>
+
+<script>
+function registerUser(e) {
+    e.preventDefault();
+
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+
+    localStorage.setItem(username, password);
+    alert("Registration successful!");
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>
