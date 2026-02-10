@@ -1,1 +1,203 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fresh Market – Interactive Page</title>
+
+<style>
+/* ===== GLOBAL ===== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(120deg, #e8f5e9, #ffffff);
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+header {
+    background: #2e7d32;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* ===== PRODUCTS ===== */
+.container {
+    padding: 20px;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+
+.card h3 {
+    margin: 10px 0;
+}
+
+button {
+    background: #2e7d32;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: transform 0.2s, background 0.3s;
+}
+
+button:hover {
+    background: #1b5e20;
+    transform: scale(1.1);
+}
+
+/* ===== CART ===== */
+.cart {
+    margin-top: 30px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.cart ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* ===== TOAST ===== */
+#toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #333;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s;
+}
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🥕 Fresh Market</h1>
+    <p>Interactive Fruit & Vegetable Shop</p>
+    <h3>🛒 Cart Items: <span id="count">0</span></h3>
+</header>
+
+<div class="container">
+
+    <div class="products">
+        <div class="card">
+            <h3>🍎 Apples</h3>
+            <p>TZS 2,000</p>
+            <button onclick="addItem('Apples', 2000)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <h3>🍌 Bananas</h3>
+            <p>TZS 1,500</p>
+            <button onclick="addItem('Bananas', 1500)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <h3>🍅 Tomatoes</h3>
+            <p>TZS 1,800</p>
+            <button onclick="addItem('Tomatoes', 1800)">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <h3>🧅 Onions</h3>
+            <p>TZS 1,200</p>
+            <button onclick="addItem('Onions', 1200)">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="cart">
+        <h2>Your Cart</h2>
+        <ul id="cart"></ul>
+        <h3>Total: TZS <span id="total">0</span></h3>
+        <button onclick="checkout()">Checkout</button>
+    </div>
+
+</div>
+
+<div id="toast"></div>
+
+<script>
+let cart = [];
+let total = 0;
+
+function addItem(name, price) {
+    cart.push({name, price});
+    total += price;
+    updateCart();
+    showToast(name + " added 🛒");
+}
+
+function updateCart() {
+    const list = document.getElementById("cart");
+    list.innerHTML = "";
+
+    cart.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item.name + " - TZS " + item.price;
+        list.appendChild(li);
+    });
+
+    document.getElementById("total").innerText = total;
+    document.getElementById("count").innerText = cart.length;
+}
+
+function checkout() {
+    if (cart.length === 0) {
+        showToast("Cart is empty!");
+        return;
+    }
+    showToast("Order placed successfully ✅");
+    cart = [];
+    total = 0;
+    updateCart();
+}
+
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.classList.add("show");
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2000);
+}
+</script>
+
+</body>
+</html>
